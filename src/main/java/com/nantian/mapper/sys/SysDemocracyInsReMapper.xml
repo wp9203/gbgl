@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nantian.mapper.sys.SysDemocracyInsReMapper">
+  <resultMap id="BaseResultMap" type="com.nantian.entity.sys.SysDemocracyInsRe">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="CANDIDATE_NAME" jdbcType="VARCHAR" property="candidateName" />
+    <result column="INSPECT_TIME" jdbcType="TIMESTAMP" property="inspectTime" />
+    <result column="INSPECT_TEAM_MEMBER" jdbcType="VARCHAR" property="inspectTeamMember" />
+    <result column="MEETING_SCOPE" jdbcType="VARCHAR" property="meetingScope" />
+    <result column="DUE_NUMBER" jdbcType="VARCHAR" property="dueNumber" />
+    <result column="ACTUAL_NUMBER" jdbcType="VARCHAR" property="actualNumber" />
+    <result column="TOTAL_VALID_VOTES" jdbcType="VARCHAR" property="totalValidVotes" />
+    <result column="VOTE" jdbcType="VARCHAR" property="vote" />
+    <result column="CON_SCOPE" jdbcType="VARCHAR" property="conScope" />
+    <result column="CON_DUE_NUMBER" jdbcType="VARCHAR" property="conDueNumber" />
+    <result column="CON_ACTUAL_NUMBER" jdbcType="VARCHAR" property="conActualNumber" />
+    <result column="RECOMMEND_NUMBER" jdbcType="VARCHAR" property="recommendNumber" />
+    <result column="INSPECT_DATA" jdbcType="VARCHAR" property="inspectData" />
+    <result column="DELAY_INSPECT_DATA" jdbcType="VARCHAR" property="delayInspectData" />
+    <result column="CREATION_TIME" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CANDIDATE_NAME, INSPECT_TIME, INSPECT_TEAM_MEMBER, MEETING_SCOPE, DUE_NUMBER, 
+    ACTUAL_NUMBER, TOTAL_VALID_VOTES, VOTE, CON_SCOPE, CON_DUE_NUMBER, CON_ACTUAL_NUMBER, 
+    RECOMMEND_NUMBER, INSPECT_DATA, DELAY_INSPECT_DATA, CREATION_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.nantian.entity.sys.SysDemocracyInsReExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_DEMOCRACY_INS_RE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_DEMOCRACY_INS_RE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_DEMOCRACY_INS_RE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nantian.entity.sys.SysDemocracyInsReExample">
+    delete from SYS_DEMOCRACY_INS_RE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nantian.entity.sys.SysDemocracyInsRe">
+    insert into SYS_DEMOCRACY_INS_RE (ID, CANDIDATE_NAME, INSPECT_TIME, 
+      INSPECT_TEAM_MEMBER, MEETING_SCOPE, DUE_NUMBER, 
+      ACTUAL_NUMBER, TOTAL_VALID_VOTES, VOTE, 
+      CON_SCOPE, CON_DUE_NUMBER, CON_ACTUAL_NUMBER, 
+      RECOMMEND_NUMBER, INSPECT_DATA, DELAY_INSPECT_DATA, 
+      CREATION_TIME, UPDATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{candidateName,jdbcType=VARCHAR}, #{inspectTime,jdbcType=TIMESTAMP}, 
+      #{inspectTeamMember,jdbcType=VARCHAR}, #{meetingScope,jdbcType=VARCHAR}, #{dueNumber,jdbcType=VARCHAR}, 
+      #{actualNumber,jdbcType=VARCHAR}, #{totalValidVotes,jdbcType=VARCHAR}, #{vote,jdbcType=VARCHAR}, 
+      #{conScope,jdbcType=VARCHAR}, #{conDueNumber,jdbcType=VARCHAR}, #{conActualNumber,jdbcType=VARCHAR}, 
+      #{recommendNumber,jdbcType=VARCHAR}, #{inspectData,jdbcType=VARCHAR}, #{delayInspectData,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nantian.entity.sys.SysDemocracyInsRe">
+    insert into SYS_DEMOCRACY_INS_RE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="candidateName != null">
+        CANDIDATE_NAME,
+      </if>
+      <if test="inspectTime != null">
+        INSPECT_TIME,
+      </if>
+      <if test="inspectTeamMember != null">
+        INSPECT_TEAM_MEMBER,
+      </if>
+      <if test="meetingScope != null">
+        MEETING_SCOPE,
+      </if>
+      <if test="dueNumber != null">
+        DUE_NUMBER,
+      </if>
+      <if test="actualNumber != null">
+        ACTUAL_NUMBER,
+      </if>
+      <if test="totalValidVotes != null">
+        TOTAL_VALID_VOTES,
+      </if>
+      <if test="vote != null">
+        VOTE,
+      </if>
+      <if test="conScope != null">
+        CON_SCOPE,
+      </if>
+      <if test="conDueNumber != null">
+        CON_DUE_NUMBER,
+      </if>
+      <if test="conActualNumber != null">
+        CON_ACTUAL_NUMBER,
+      </if>
+      <if test="recommendNumber != null">
+        RECOMMEND_NUMBER,
+      </if>
+      <if test="inspectData != null">
+        INSPECT_DATA,
+      </if>
+      <if test="delayInspectData != null">
+        DELAY_INSPECT_DATA,
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="candidateName != null">
+        #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectTime != null">
+        #{inspectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectTeamMember != null">
+        #{inspectTeamMember,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingScope != null">
+        #{meetingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="dueNumber != null">
+        #{dueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="actualNumber != null">
+        #{actualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="totalValidVotes != null">
+        #{totalValidVotes,jdbcType=VARCHAR},
+      </if>
+      <if test="vote != null">
+        #{vote,jdbcType=VARCHAR},
+      </if>
+      <if test="conScope != null">
+        #{conScope,jdbcType=VARCHAR},
+      </if>
+      <if test="conDueNumber != null">
+        #{conDueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="conActualNumber != null">
+        #{conActualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendNumber != null">
+        #{recommendNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectData != null">
+        #{inspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="delayInspectData != null">
+        #{delayInspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nantian.entity.sys.SysDemocracyInsReExample" resultType="java.lang.Long">
+    select count(*) from SYS_DEMOCRACY_INS_RE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_DEMOCRACY_INS_RE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.candidateName != null">
+        CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspectTime != null">
+        INSPECT_TIME = #{record.inspectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inspectTeamMember != null">
+        INSPECT_TEAM_MEMBER = #{record.inspectTeamMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingScope != null">
+        MEETING_SCOPE = #{record.meetingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dueNumber != null">
+        DUE_NUMBER = #{record.dueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualNumber != null">
+        ACTUAL_NUMBER = #{record.actualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalValidVotes != null">
+        TOTAL_VALID_VOTES = #{record.totalValidVotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vote != null">
+        VOTE = #{record.vote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conScope != null">
+        CON_SCOPE = #{record.conScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conDueNumber != null">
+        CON_DUE_NUMBER = #{record.conDueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conActualNumber != null">
+        CON_ACTUAL_NUMBER = #{record.conActualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommendNumber != null">
+        RECOMMEND_NUMBER = #{record.recommendNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspectData != null">
+        INSPECT_DATA = #{record.inspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delayInspectData != null">
+        DELAY_INSPECT_DATA = #{record.delayInspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationTime != null">
+        CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_DEMOCRACY_INS_RE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      INSPECT_TIME = #{record.inspectTime,jdbcType=TIMESTAMP},
+      INSPECT_TEAM_MEMBER = #{record.inspectTeamMember,jdbcType=VARCHAR},
+      MEETING_SCOPE = #{record.meetingScope,jdbcType=VARCHAR},
+      DUE_NUMBER = #{record.dueNumber,jdbcType=VARCHAR},
+      ACTUAL_NUMBER = #{record.actualNumber,jdbcType=VARCHAR},
+      TOTAL_VALID_VOTES = #{record.totalValidVotes,jdbcType=VARCHAR},
+      VOTE = #{record.vote,jdbcType=VARCHAR},
+      CON_SCOPE = #{record.conScope,jdbcType=VARCHAR},
+      CON_DUE_NUMBER = #{record.conDueNumber,jdbcType=VARCHAR},
+      CON_ACTUAL_NUMBER = #{record.conActualNumber,jdbcType=VARCHAR},
+      RECOMMEND_NUMBER = #{record.recommendNumber,jdbcType=VARCHAR},
+      INSPECT_DATA = #{record.inspectData,jdbcType=VARCHAR},
+      DELAY_INSPECT_DATA = #{record.delayInspectData,jdbcType=VARCHAR},
+      CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nantian.entity.sys.SysDemocracyInsRe">
+    update SYS_DEMOCRACY_INS_RE
+    <set>
+      <if test="candidateName != null">
+        CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectTime != null">
+        INSPECT_TIME = #{inspectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectTeamMember != null">
+        INSPECT_TEAM_MEMBER = #{inspectTeamMember,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingScope != null">
+        MEETING_SCOPE = #{meetingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="dueNumber != null">
+        DUE_NUMBER = #{dueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="actualNumber != null">
+        ACTUAL_NUMBER = #{actualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="totalValidVotes != null">
+        TOTAL_VALID_VOTES = #{totalValidVotes,jdbcType=VARCHAR},
+      </if>
+      <if test="vote != null">
+        VOTE = #{vote,jdbcType=VARCHAR},
+      </if>
+      <if test="conScope != null">
+        CON_SCOPE = #{conScope,jdbcType=VARCHAR},
+      </if>
+      <if test="conDueNumber != null">
+        CON_DUE_NUMBER = #{conDueNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="conActualNumber != null">
+        CON_ACTUAL_NUMBER = #{conActualNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendNumber != null">
+        RECOMMEND_NUMBER = #{recommendNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectData != null">
+        INSPECT_DATA = #{inspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="delayInspectData != null">
+        DELAY_INSPECT_DATA = #{delayInspectData,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nantian.entity.sys.SysDemocracyInsRe">
+    update SYS_DEMOCRACY_INS_RE
+    set CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      INSPECT_TIME = #{inspectTime,jdbcType=TIMESTAMP},
+      INSPECT_TEAM_MEMBER = #{inspectTeamMember,jdbcType=VARCHAR},
+      MEETING_SCOPE = #{meetingScope,jdbcType=VARCHAR},
+      DUE_NUMBER = #{dueNumber,jdbcType=VARCHAR},
+      ACTUAL_NUMBER = #{actualNumber,jdbcType=VARCHAR},
+      TOTAL_VALID_VOTES = #{totalValidVotes,jdbcType=VARCHAR},
+      VOTE = #{vote,jdbcType=VARCHAR},
+      CON_SCOPE = #{conScope,jdbcType=VARCHAR},
+      CON_DUE_NUMBER = #{conDueNumber,jdbcType=VARCHAR},
+      CON_ACTUAL_NUMBER = #{conActualNumber,jdbcType=VARCHAR},
+      RECOMMEND_NUMBER = #{recommendNumber,jdbcType=VARCHAR},
+      INSPECT_DATA = #{inspectData,jdbcType=VARCHAR},
+      DELAY_INSPECT_DATA = #{delayInspectData,jdbcType=VARCHAR},
+      CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateflow" parameterType="com.nantian.entity.sys.SysFlow">
+    update SYS_FLOW
+    set DEMOCRACY_INS_RE_ID = #{democracyInsReId,jdbcType=TIMESTAMP},
+      DEMOCRACY_INS_RE_RESULT = #{democracyInsReResult,jdbcType=VARCHAR},
+      STEP5 = #{step5,jdbcType=VARCHAR}
+    where USERID = #{democracyInsReId,jdbcType=DECIMAL}
+  </update>
+</mapper>

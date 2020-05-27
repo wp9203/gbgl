@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nantian.mapper.sys.SysPubBeforeInOfficeMapper">
+  <resultMap id="BaseResultMap" type="com.nantian.entity.sys.SysPubBeforeInOffice">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="CANDIDATE_NAME" jdbcType="VARCHAR" property="candidateName" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="PUBLIC_START_TIME" jdbcType="TIMESTAMP" property="publicStartTime" />
+    <result column="PUBLIC_END_TIME" jdbcType="TIMESTAMP" property="publicEndTime" />
+    <result column="PUBLIC_TYPE" jdbcType="VARCHAR" property="publicType" />
+    <result column="PUBLIC_RESULT" jdbcType="VARCHAR" property="publicResult" />
+    <result column="PUBLIC_DATA" jdbcType="VARCHAR" property="publicData" />
+    <result column="PUBLIC_PRO_VER_CON" jdbcType="VARCHAR" property="publicProVerCon" />
+    <result column="CREATION_TIME" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="PROSTION_RECUPERATIVE" jdbcType="VARCHAR" property="prostionRecuperative" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CANDIDATE_NAME, UNIT, PUBLIC_START_TIME, PUBLIC_END_TIME, PUBLIC_TYPE, PUBLIC_RESULT, 
+    PUBLIC_DATA, PUBLIC_PRO_VER_CON, CREATION_TIME, UPDATE_TIME, PROSTION_RECUPERATIVE
+  </sql>
+  <select id="selectByExample" parameterType="com.nantian.entity.sys.SysPubBeforeInOfficeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_PUB_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_PUB_BEFORE_IN_OFFICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_PUB_BEFORE_IN_OFFICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nantian.entity.sys.SysPubBeforeInOfficeExample">
+    delete from SYS_PUB_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nantian.entity.sys.SysPubBeforeInOffice">
+    insert into SYS_PUB_BEFORE_IN_OFFICE (ID, CANDIDATE_NAME, UNIT, 
+      PUBLIC_START_TIME, PUBLIC_END_TIME, PUBLIC_TYPE, 
+      PUBLIC_RESULT, PUBLIC_DATA, PUBLIC_PRO_VER_CON, 
+      CREATION_TIME, UPDATE_TIME, PROSTION_RECUPERATIVE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{candidateName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{publicStartTime,jdbcType=TIMESTAMP}, #{publicEndTime,jdbcType=TIMESTAMP}, #{publicType,jdbcType=VARCHAR}, 
+      #{publicResult,jdbcType=VARCHAR}, #{publicData,jdbcType=VARCHAR}, #{publicProVerCon,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{prostionRecuperative,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nantian.entity.sys.SysPubBeforeInOffice">
+    insert into SYS_PUB_BEFORE_IN_OFFICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="candidateName != null">
+        CANDIDATE_NAME,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="publicStartTime != null">
+        PUBLIC_START_TIME,
+      </if>
+      <if test="publicEndTime != null">
+        PUBLIC_END_TIME,
+      </if>
+      <if test="publicType != null">
+        PUBLIC_TYPE,
+      </if>
+      <if test="publicResult != null">
+        PUBLIC_RESULT,
+      </if>
+      <if test="publicData != null">
+        PUBLIC_DATA,
+      </if>
+      <if test="publicProVerCon != null">
+        PUBLIC_PRO_VER_CON,
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="prostionRecuperative != null">
+        PROSTION_RECUPERATIVE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="candidateName != null">
+        #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="publicStartTime != null">
+        #{publicStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicEndTime != null">
+        #{publicEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicType != null">
+        #{publicType,jdbcType=VARCHAR},
+      </if>
+      <if test="publicResult != null">
+        #{publicResult,jdbcType=VARCHAR},
+      </if>
+      <if test="publicData != null">
+        #{publicData,jdbcType=VARCHAR},
+      </if>
+      <if test="publicProVerCon != null">
+        #{publicProVerCon,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prostionRecuperative != null">
+        #{prostionRecuperative,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nantian.entity.sys.SysPubBeforeInOfficeExample" resultType="java.lang.Long">
+    select count(*) from SYS_PUB_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_PUB_BEFORE_IN_OFFICE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.candidateName != null">
+        CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicStartTime != null">
+        PUBLIC_START_TIME = #{record.publicStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.publicEndTime != null">
+        PUBLIC_END_TIME = #{record.publicEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.publicType != null">
+        PUBLIC_TYPE = #{record.publicType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicResult != null">
+        PUBLIC_RESULT = #{record.publicResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicData != null">
+        PUBLIC_DATA = #{record.publicData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicProVerCon != null">
+        PUBLIC_PRO_VER_CON = #{record.publicProVerCon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationTime != null">
+        CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prostionRecuperative != null">
+        PROSTION_RECUPERATIVE = #{record.prostionRecuperative,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_PUB_BEFORE_IN_OFFICE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      PUBLIC_START_TIME = #{record.publicStartTime,jdbcType=TIMESTAMP},
+      PUBLIC_END_TIME = #{record.publicEndTime,jdbcType=TIMESTAMP},
+      PUBLIC_TYPE = #{record.publicType,jdbcType=VARCHAR},
+      PUBLIC_RESULT = #{record.publicResult,jdbcType=VARCHAR},
+      PUBLIC_DATA = #{record.publicData,jdbcType=VARCHAR},
+      PUBLIC_PRO_VER_CON = #{record.publicProVerCon,jdbcType=VARCHAR},
+      CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      PROSTION_RECUPERATIVE = #{record.prostionRecuperative,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nantian.entity.sys.SysPubBeforeInOffice">
+    update SYS_PUB_BEFORE_IN_OFFICE
+    <set>
+      <if test="candidateName != null">
+        CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="publicStartTime != null">
+        PUBLIC_START_TIME = #{publicStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicEndTime != null">
+        PUBLIC_END_TIME = #{publicEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicType != null">
+        PUBLIC_TYPE = #{publicType,jdbcType=VARCHAR},
+      </if>
+      <if test="publicResult != null">
+        PUBLIC_RESULT = #{publicResult,jdbcType=VARCHAR},
+      </if>
+      <if test="publicData != null">
+        PUBLIC_DATA = #{publicData,jdbcType=VARCHAR},
+      </if>
+      <if test="publicProVerCon != null">
+        PUBLIC_PRO_VER_CON = #{publicProVerCon,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prostionRecuperative != null">
+        PROSTION_RECUPERATIVE = #{prostionRecuperative,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nantian.entity.sys.SysPubBeforeInOffice">
+    update SYS_PUB_BEFORE_IN_OFFICE
+    set CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      PUBLIC_START_TIME = #{publicStartTime,jdbcType=TIMESTAMP},
+      PUBLIC_END_TIME = #{publicEndTime,jdbcType=TIMESTAMP},
+      PUBLIC_TYPE = #{publicType,jdbcType=VARCHAR},
+      PUBLIC_RESULT = #{publicResult,jdbcType=VARCHAR},
+      PUBLIC_DATA = #{publicData,jdbcType=VARCHAR},
+      PUBLIC_PRO_VER_CON = #{publicProVerCon,jdbcType=VARCHAR},
+      CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      PROSTION_RECUPERATIVE = #{prostionRecuperative,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateflow" parameterType="com.nantian.entity.sys.SysFlow">
+    update SYS_FLOW
+    set PUB_BEFORE_IN_OFFICE_ID = #{pubBeforeInOfficeId,jdbcType=TIMESTAMP},
+      PUB_BEFORE_IN_OFFICE_RESULT = #{pubBeforeInOfficeResult,jdbcType=VARCHAR},
+      STEP10 = #{step10,jdbcType=VARCHAR}
+    where USERID = #{pubBeforeInOfficeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nantian.mapper.sys.SysAppBeforeInOfficeMapper">
+  <resultMap id="BaseResultMap" type="com.nantian.entity.sys.SysAppBeforeInOffice">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="CANDIDATE_NAME" jdbcType="VARCHAR" property="candidateName" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="POSITION" jdbcType="VARCHAR" property="position" />
+    <result column="APPROVAL_DATE" jdbcType="TIMESTAMP" property="approvalDate" />
+    <result column="APPROVAL_NUMBER" jdbcType="VARCHAR" property="approvalNumber" />
+    <result column="REPLY_DATE" jdbcType="TIMESTAMP" property="replyDate" />
+    <result column="PASS" jdbcType="VARCHAR" property="pass" />
+    <result column="REPLY_NUMBER" jdbcType="VARCHAR" property="replyNumber" />
+    <result column="REPLY_DATA" jdbcType="VARCHAR" property="replyData" />
+    <result column="CREATION_TIME" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CANDIDATE_NAME, UNIT, POSITION, APPROVAL_DATE, APPROVAL_NUMBER, REPLY_DATE, PASS, 
+    REPLY_NUMBER, REPLY_DATA, CREATION_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.nantian.entity.sys.SysAppBeforeInOfficeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_APP_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_APP_BEFORE_IN_OFFICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_APP_BEFORE_IN_OFFICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nantian.entity.sys.SysAppBeforeInOfficeExample">
+    delete from SYS_APP_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nantian.entity.sys.SysAppBeforeInOffice">
+    insert into SYS_APP_BEFORE_IN_OFFICE (ID, CANDIDATE_NAME, UNIT, 
+      POSITION, APPROVAL_DATE, APPROVAL_NUMBER, 
+      REPLY_DATE, PASS, REPLY_NUMBER, 
+      REPLY_DATA, CREATION_TIME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{candidateName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{approvalDate,jdbcType=TIMESTAMP}, #{approvalNumber,jdbcType=VARCHAR}, 
+      #{replyDate,jdbcType=TIMESTAMP}, #{pass,jdbcType=VARCHAR}, #{replyNumber,jdbcType=VARCHAR}, 
+      #{replyData,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nantian.entity.sys.SysAppBeforeInOffice">
+    insert into SYS_APP_BEFORE_IN_OFFICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="candidateName != null">
+        CANDIDATE_NAME,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="approvalDate != null">
+        APPROVAL_DATE,
+      </if>
+      <if test="approvalNumber != null">
+        APPROVAL_NUMBER,
+      </if>
+      <if test="replyDate != null">
+        REPLY_DATE,
+      </if>
+      <if test="pass != null">
+        PASS,
+      </if>
+      <if test="replyNumber != null">
+        REPLY_NUMBER,
+      </if>
+      <if test="replyData != null">
+        REPLY_DATA,
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="candidateName != null">
+        #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        #{approvalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalNumber != null">
+        #{approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null">
+        #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="replyNumber != null">
+        #{replyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="replyData != null">
+        #{replyData,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nantian.entity.sys.SysAppBeforeInOfficeExample" resultType="java.lang.Long">
+    select count(*) from SYS_APP_BEFORE_IN_OFFICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_APP_BEFORE_IN_OFFICE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.candidateName != null">
+        CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalDate != null">
+        APPROVAL_DATE = #{record.approvalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalNumber != null">
+        APPROVAL_NUMBER = #{record.approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyDate != null">
+        REPLY_DATE = #{record.replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pass != null">
+        PASS = #{record.pass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyNumber != null">
+        REPLY_NUMBER = #{record.replyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyData != null">
+        REPLY_DATA = #{record.replyData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationTime != null">
+        CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_APP_BEFORE_IN_OFFICE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      APPROVAL_DATE = #{record.approvalDate,jdbcType=TIMESTAMP},
+      APPROVAL_NUMBER = #{record.approvalNumber,jdbcType=VARCHAR},
+      REPLY_DATE = #{record.replyDate,jdbcType=TIMESTAMP},
+      PASS = #{record.pass,jdbcType=VARCHAR},
+      REPLY_NUMBER = #{record.replyNumber,jdbcType=VARCHAR},
+      REPLY_DATA = #{record.replyData,jdbcType=VARCHAR},
+      CREATION_TIME = #{record.creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nantian.entity.sys.SysAppBeforeInOffice">
+    update SYS_APP_BEFORE_IN_OFFICE
+    <set>
+      <if test="candidateName != null">
+        CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        APPROVAL_DATE = #{approvalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalNumber != null">
+        APPROVAL_NUMBER = #{approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null">
+        REPLY_DATE = #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pass != null">
+        PASS = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="replyNumber != null">
+        REPLY_NUMBER = #{replyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="replyData != null">
+        REPLY_DATA = #{replyData,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nantian.entity.sys.SysAppBeforeInOffice">
+    update SYS_APP_BEFORE_IN_OFFICE
+    set CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      APPROVAL_DATE = #{approvalDate,jdbcType=TIMESTAMP},
+      APPROVAL_NUMBER = #{approvalNumber,jdbcType=VARCHAR},
+      REPLY_DATE = #{replyDate,jdbcType=TIMESTAMP},
+      PASS = #{pass,jdbcType=VARCHAR},
+      REPLY_NUMBER = #{replyNumber,jdbcType=VARCHAR},
+      REPLY_DATA = #{replyData,jdbcType=VARCHAR},
+      CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateflow" parameterType="com.nantian.entity.sys.SysFlow">
+    update SYS_FLOW
+    set APP_BEFORE_IN_OFFICE_ID = #{appBeforeInOfficeId,jdbcType=TIMESTAMP},
+      APP_BEFORE_IN_OFFICE_RESULT = #{appBeforeInOfficeResult,jdbcType=VARCHAR},
+      STEP12 = #{step12,jdbcType=VARCHAR}
+    where USERID = #{appBeforeInOfficeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

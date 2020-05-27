@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nantian.mapper.sys.SysPostAppointmentMapper">
+  <resultMap id="BaseResultMap" type="com.nantian.entity.sys.SysPostAppointment">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="CANDIDATE_NAME" jdbcType="VARCHAR" property="candidateName" />
+    <result column="POSITION" jdbcType="VARCHAR" property="position" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="NEW_POSITION" jdbcType="VARCHAR" property="newPosition" />
+    <result column="NEW_UNIT" jdbcType="VARCHAR" property="newUnit" />
+    <result column="APPOINTMENT_NUMBER" jdbcType="VARCHAR" property="appointmentNumber" />
+    <result column="APPOINTMENT_DATE" jdbcType="TIMESTAMP" property="appointmentDate" />
+    <result column="DISMISSAL_NUMBER" jdbcType="VARCHAR" property="dismissalNumber" />
+    <result column="DISMISSAL_DATE" jdbcType="TIMESTAMP" property="dismissalDate" />
+    <result column="EMPLOYMENT_NUMBER" jdbcType="VARCHAR" property="employmentNumber" />
+    <result column="EMPLOYMENT_DATE" jdbcType="TIMESTAMP" property="employmentDate" />
+    <result column="FIRED_NUMBER" jdbcType="VARCHAR" property="firedNumber" />
+    <result column="FIRED_DATE" jdbcType="DATE" property="firedDate" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CANDIDATE_NAME, POSITION, UNIT, NEW_POSITION, NEW_UNIT, APPOINTMENT_NUMBER, APPOINTMENT_DATE, 
+    DISMISSAL_NUMBER, DISMISSAL_DATE, EMPLOYMENT_NUMBER, EMPLOYMENT_DATE, FIRED_NUMBER, 
+    FIRED_DATE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.nantian.entity.sys.SysPostAppointmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_POST_APPOINTMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_POST_APPOINTMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_POST_APPOINTMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nantian.entity.sys.SysPostAppointmentExample">
+    delete from SYS_POST_APPOINTMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nantian.entity.sys.SysPostAppointment">
+    insert into SYS_POST_APPOINTMENT (ID, CANDIDATE_NAME, POSITION, 
+      UNIT, NEW_POSITION, NEW_UNIT, 
+      APPOINTMENT_NUMBER, APPOINTMENT_DATE, DISMISSAL_NUMBER, 
+      DISMISSAL_DATE, EMPLOYMENT_NUMBER, EMPLOYMENT_DATE, 
+      FIRED_NUMBER, FIRED_DATE, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{candidateName,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{newPosition,jdbcType=VARCHAR}, #{newUnit,jdbcType=VARCHAR}, 
+      #{appointmentNumber,jdbcType=VARCHAR}, #{appointmentDate,jdbcType=TIMESTAMP}, #{dismissalNumber,jdbcType=VARCHAR}, 
+      #{dismissalDate,jdbcType=TIMESTAMP}, #{employmentNumber,jdbcType=VARCHAR}, #{employmentDate,jdbcType=TIMESTAMP}, 
+      #{firedNumber,jdbcType=VARCHAR}, #{firedDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nantian.entity.sys.SysPostAppointment">
+    insert into SYS_POST_APPOINTMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="candidateName != null">
+        CANDIDATE_NAME,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="newPosition != null">
+        NEW_POSITION,
+      </if>
+      <if test="newUnit != null">
+        NEW_UNIT,
+      </if>
+      <if test="appointmentNumber != null">
+        APPOINTMENT_NUMBER,
+      </if>
+      <if test="appointmentDate != null">
+        APPOINTMENT_DATE,
+      </if>
+      <if test="dismissalNumber != null">
+        DISMISSAL_NUMBER,
+      </if>
+      <if test="dismissalDate != null">
+        DISMISSAL_DATE,
+      </if>
+      <if test="employmentNumber != null">
+        EMPLOYMENT_NUMBER,
+      </if>
+      <if test="employmentDate != null">
+        EMPLOYMENT_DATE,
+      </if>
+      <if test="firedNumber != null">
+        FIRED_NUMBER,
+      </if>
+      <if test="firedDate != null">
+        FIRED_DATE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="candidateName != null">
+        #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="newPosition != null">
+        #{newPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="newUnit != null">
+        #{newUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentNumber != null">
+        #{appointmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentDate != null">
+        #{appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dismissalNumber != null">
+        #{dismissalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dismissalDate != null">
+        #{dismissalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employmentNumber != null">
+        #{employmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentDate != null">
+        #{employmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firedNumber != null">
+        #{firedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="firedDate != null">
+        #{firedDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nantian.entity.sys.SysPostAppointmentExample" resultType="java.lang.Long">
+    select count(*) from SYS_POST_APPOINTMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_POST_APPOINTMENT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.candidateName != null">
+        CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newPosition != null">
+        NEW_POSITION = #{record.newPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newUnit != null">
+        NEW_UNIT = #{record.newUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmentNumber != null">
+        APPOINTMENT_NUMBER = #{record.appointmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmentDate != null">
+        APPOINTMENT_DATE = #{record.appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dismissalNumber != null">
+        DISMISSAL_NUMBER = #{record.dismissalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dismissalDate != null">
+        DISMISSAL_DATE = #{record.dismissalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.employmentNumber != null">
+        EMPLOYMENT_NUMBER = #{record.employmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employmentDate != null">
+        EMPLOYMENT_DATE = #{record.employmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.firedNumber != null">
+        FIRED_NUMBER = #{record.firedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firedDate != null">
+        FIRED_DATE = #{record.firedDate,jdbcType=DATE},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_POST_APPOINTMENT
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CANDIDATE_NAME = #{record.candidateName,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      NEW_POSITION = #{record.newPosition,jdbcType=VARCHAR},
+      NEW_UNIT = #{record.newUnit,jdbcType=VARCHAR},
+      APPOINTMENT_NUMBER = #{record.appointmentNumber,jdbcType=VARCHAR},
+      APPOINTMENT_DATE = #{record.appointmentDate,jdbcType=TIMESTAMP},
+      DISMISSAL_NUMBER = #{record.dismissalNumber,jdbcType=VARCHAR},
+      DISMISSAL_DATE = #{record.dismissalDate,jdbcType=TIMESTAMP},
+      EMPLOYMENT_NUMBER = #{record.employmentNumber,jdbcType=VARCHAR},
+      EMPLOYMENT_DATE = #{record.employmentDate,jdbcType=TIMESTAMP},
+      FIRED_NUMBER = #{record.firedNumber,jdbcType=VARCHAR},
+      FIRED_DATE = #{record.firedDate,jdbcType=DATE},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nantian.entity.sys.SysPostAppointment">
+    update SYS_POST_APPOINTMENT
+    <set>
+      <if test="candidateName != null">
+        CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="newPosition != null">
+        NEW_POSITION = #{newPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="newUnit != null">
+        NEW_UNIT = #{newUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentNumber != null">
+        APPOINTMENT_NUMBER = #{appointmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentDate != null">
+        APPOINTMENT_DATE = #{appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dismissalNumber != null">
+        DISMISSAL_NUMBER = #{dismissalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dismissalDate != null">
+        DISMISSAL_DATE = #{dismissalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employmentNumber != null">
+        EMPLOYMENT_NUMBER = #{employmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentDate != null">
+        EMPLOYMENT_DATE = #{employmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firedNumber != null">
+        FIRED_NUMBER = #{firedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="firedDate != null">
+        FIRED_DATE = #{firedDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nantian.entity.sys.SysPostAppointment">
+    update SYS_POST_APPOINTMENT
+    set CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      NEW_POSITION = #{newPosition,jdbcType=VARCHAR},
+      NEW_UNIT = #{newUnit,jdbcType=VARCHAR},
+      APPOINTMENT_NUMBER = #{appointmentNumber,jdbcType=VARCHAR},
+      APPOINTMENT_DATE = #{appointmentDate,jdbcType=TIMESTAMP},
+      DISMISSAL_NUMBER = #{dismissalNumber,jdbcType=VARCHAR},
+      DISMISSAL_DATE = #{dismissalDate,jdbcType=TIMESTAMP},
+      EMPLOYMENT_NUMBER = #{employmentNumber,jdbcType=VARCHAR},
+      EMPLOYMENT_DATE = #{employmentDate,jdbcType=TIMESTAMP},
+      FIRED_NUMBER = #{firedNumber,jdbcType=VARCHAR},
+      FIRED_DATE = #{firedDate,jdbcType=DATE},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateflow" parameterType="com.nantian.entity.sys.SysFlow">
+    update SYS_FLOW
+    set POST_APPOINT_ID = #{postAppointId,jdbcType=TIMESTAMP},
+      POST_APPOINT_RESULT = #{postAppointResult,jdbcType=VARCHAR},
+      STEP18 = #{step18,jdbcType=VARCHAR},
+      FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR}
+    where USERID = #{postAppointId,jdbcType=DECIMAL}
+  </update>
+</mapper>
